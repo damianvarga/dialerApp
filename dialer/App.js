@@ -91,7 +91,22 @@ const App: () => Node = () => {
     return originalText;
   };
 
-
+  var spaces = function(result){
+    var result3 = "";
+    if (result.charCodeAt(0) === 48) {
+      if (result.charCodeAt(1) === 57) {
+        result3 = result.slice(0,4) + " " + result.slice(4, 7) + " " + result.slice(7);
+      }
+      else {
+        result3 = result.slice(0,3) + " " + result.slice(3, 6) + " " + result.slice(6);
+      }
+    }
+    else {
+      result3 = result;
+    
+    }
+    return result3;
+  }
   const [result, setResult] = useState("");
   const [dial, setDial] = useState(true);
   return (
@@ -101,7 +116,7 @@ const App: () => Node = () => {
       </View>
       <View style={styles.whiteArea}>
         <Text style={styles.bigBold}> 
-          {result}
+          {spaces(result)}
           </Text>
 
 
