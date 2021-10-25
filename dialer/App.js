@@ -5,7 +5,7 @@
  * @format
  * @flow strict-local
  */
-
+import RNImmediatePhoneCall from 'react-native-immediate-phone-call';
 import React from 'react';
 import type {Node} from 'react';
 import {useState} from 'react';
@@ -13,7 +13,7 @@ import {
   SafeAreaView,
   ScrollView,
   StatusBar,
-  StyleSheet,
+  StyleSheet, 
   Text,
   useColorScheme,
   View,
@@ -24,7 +24,7 @@ import {
   Dimensions,
   Image,
   KeyboardAvoidingViewComponent,
-  
+
 } from 'react-native';
 import {
   Colors,
@@ -82,7 +82,7 @@ const App: () => Node = () => {
   // this.state() {
   //   text: "Click here"
   // };
-  
+
   var addNumber = function(originalText, addedNumber) {
     // number += addedNumber;
     // console.log(number);
@@ -91,7 +91,7 @@ const App: () => Node = () => {
     return originalText;
   };
 
-  
+
   const [result, setResult] = useState("");
   const [dial, setDial] = useState(true);
   return (
@@ -100,10 +100,12 @@ const App: () => Node = () => {
         <Text style={styles.whiteText}>Phone</Text>
       </View>
       <View style={styles.whiteArea}>
-        <Text style={styles.bigBold}>{result}</Text>
-        
-        
-      
+        <Text style={styles.bigBold}> 
+          {result}
+          </Text>
+
+
+
       </View>
       <View style={styles.delete}>
       <Pressable onPress={function() {
@@ -124,15 +126,15 @@ const App: () => Node = () => {
       </View>
       <View style={styles.rowContainer}>
         <Pressable style={styles.button}
-        onPress={function () {          
+        onPress={function () {
           var result2 = addNumber(result, "1");
           console.log(result2);
           setResult(result2);
           //<Text>1</Text>
         }}>
-        
+
         <Text style={styles.textUp}>1</Text>
-        
+
         </Pressable>
 
         <Pressable style={styles.button}
@@ -145,7 +147,7 @@ const App: () => Node = () => {
         <Text style={styles.textUp}>2</Text>
         <Text style={styles.textDown}>ABC</Text>
         </Pressable>
-        
+
         <Pressable style={styles.button}
         onPress={function () {
           console.log("3");
@@ -155,7 +157,7 @@ const App: () => Node = () => {
         }}>
         <Text style={styles.textUp}>3</Text>
         <Text style={styles.textDown}>DEF</Text>
-        </Pressable>  
+        </Pressable>
       </View>
       <View style={styles.rowContainer}>
         <Pressable style={styles.button}
@@ -179,7 +181,7 @@ const App: () => Node = () => {
         <Text style={styles.textUp}>5</Text>
         <Text style={styles.textDown}>JKL</Text>
         </Pressable>
-        
+
         <Pressable style={styles.button}
         onPress={function () {
           console.log("6");
@@ -264,22 +266,31 @@ const App: () => Node = () => {
         </Pressable>
       </View>
       <View style={styles.receiver}>
+
         <Pressable onPress={function() {
-          result == "" || result == "*" || result == "#" ?
+          
+          result == "" || result == "*" || result == "#" || result == "+" ?
           setDial(true) :
           setDial(!dial);
-        }}>
-          
+        }}
+           onPressOut={function(){
+              console.log(dial);
+             dial === true ? RNImmediatePhoneCall.immediatePhoneCall(result) : null
+           }}
+        >
+
+
           <Image source={
-            (dial === true || result == "" || result == "*" || result == "#") ? 
+            (dial === true || result == "" || result == "*" || result == "#" || result == "+" ) ?
             require('./pictures/receiver.png'):
             require('./pictures/redReceiver.png')} style={styles.receiver}></Image>
-          
-        
+
+
         </Pressable>
+
       </View>
-    </View>   
-    
+    </View>
+
      /*
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
@@ -310,7 +321,7 @@ const App: () => Node = () => {
     </SafeAreaView>
   */
     );
-  
+
 };
 
 const styles = StyleSheet.create({
@@ -354,7 +365,7 @@ const styles = StyleSheet.create({
 
   },
   delete: {
-    
+
     paddingBottom: Dimensions.get('window').height/55,
     // height: Dimensions.get('window').height/24,
     // width: Dimensions.get('window').width/8,
@@ -372,7 +383,7 @@ const styles = StyleSheet.create({
     borderColor:"gray",
   },
   rowContainer:{
-    flexDirection: 'row', 
+    flexDirection: 'row',
   },
   textUp:{
     textAlign: 'center',
@@ -382,7 +393,7 @@ const styles = StyleSheet.create({
   textDown: {
     textAlign: 'center',
     color: '#999',
-  }, 
+  },
   receiver: {
     marginTop: Dimensions.get('window').height/20,
     alignItems: 'center',
