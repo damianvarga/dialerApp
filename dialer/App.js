@@ -290,7 +290,8 @@ const App: () => Node = () => {
         }}
            onPressOut={function(){
               console.log(dial);
-             dial === true ? RNImmediatePhoneCall.immediatePhoneCall(result) : null
+             (dial === true && !(result == "" || result == "*" || result == "#" || result == "+" )) ?
+             RNImmediatePhoneCall.immediatePhoneCall(result) : null;
            }}
         >
 
