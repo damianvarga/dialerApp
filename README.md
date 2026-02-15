@@ -1,2 +1,1 @@
-# smart-2021
-
+Aplikácia na simulovanie vytáčaní tel. čísel - školský projekt
